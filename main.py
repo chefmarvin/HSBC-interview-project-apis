@@ -8,6 +8,7 @@ origins = [
     "http://localhost:5173",
     "http://127.0.0.1",
     "http://127.0.0.1:5173",
+    "https://wonderful-bay-0ec57fa0f.5.azurestaticapps.net/"
 ]
 
 app.add_middleware(
