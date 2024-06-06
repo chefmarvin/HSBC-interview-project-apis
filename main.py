@@ -18,9 +18,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/top-ten")
-async def top_ten():
-    return {"data": 10}
+@app.get("/top-n/{n}")
+async def top_ten(n: int):
+    return {"data": n}
 
 @app.get("/")
 async def root():
