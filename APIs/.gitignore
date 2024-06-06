@@ -1,3 +1,34 @@
-.idea
-.venv
-__pycache__
+# .gitignore
+
+# Python related
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+*.pyz
+*.pyc
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+env/
+*.egg-info/
+*.eggs
+*.venv
+*.log
+
+# IDE related
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.bak
+
+# OS related
+.DS_Store
+Thumbs.db
+
+# FastAPI related
+.env
