@@ -1,6 +1,8 @@
 from fastapi import FastAPI
+from typing import Dict
 from fastapi.middleware.cors import CORSMiddleware
-from model import ITopNResponse
+from model import IYFinanceMarketIndexesInfo, IYFinanceMutualFundInfo
+from finance_data_source.yfinance import YahooFinanceQuery
 
 app = FastAPI()
 
@@ -20,24 +22,24 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/top-n/{n}", response_model=ITopNResponse)
-async def top_n(n: int):
-    """
-    Get top n
-
-    - **n**: n
-
-    Returns n
-    """
-    return { "data": n }
-
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "HSBC interview coding project"}
 
+@app.get("/market-indexes-list/", response_model=Dict[str, IYFinanceMarketIndexesInfo])
+async def market_indexes_list():
+    yf_ins = YahooFinanceQuery()
+    yf_ins_data = yf_ins.getMarketIndexesData()
+    return yf_ins_data
 
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+@app.get("/default-mutual-funds-list/", response_model=Dict[str, IYFinanceMutualFundInfo])
+async def default_mutual_funds_list():
+    yf_ins = YahooFinanceQuery()
+    yf_ins_data = yf_ins.getMutualFundsInfoBySymbols()
+    return yf_ins_data
 
-
+@app.get("/search/mutual-fund/by-symbol/{symbol}/", response_model=Dict[str, IYFinanceMutualFundInfo])
+async def search_mutual_fund_by_symbol(symbol: str):
+    yf_ins = YahooFinanceQuery()
+    yf_ins_data = yf_ins.getMutualFundsInfoBySymbols([symbol])
+    return yf_ins_data

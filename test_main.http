@@ -5,7 +5,15 @@ Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/hello/User
+GET http://127.0.0.1:8000/default-mutual-funds-list/
 Accept: application/json
 
 ###
+
+GET http://127.0.0.1:8000/search/mutual-fund/by-symbol/DIAMX/
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/market-indexes-list/
+Accept: application/json
