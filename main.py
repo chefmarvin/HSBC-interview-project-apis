@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from model import ITopNResponse
 
 app = FastAPI()
 
@@ -19,9 +20,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/top-n/{n}")
-async def top_ten(n: int):
-    return {"data": n}
+@app.get("/top-n/{n}", response_model=ITopNResponse)
+async def top_n(n: int):
+    """
+    Get top n
+
+    - **n**: n
+
+    Returns n
+    """
+    return { "data": n }
 
 @app.get("/")
 async def root():
@@ -31,3 +39,5 @@ async def root():
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
+
+
