@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Response
 from fastapi.responses import JSONResponse
+from constants import DEFAULT_HISTORY_PERIOD, ORIGINS
 from typing import Dict, Any, List
 from fastapi.middleware.cors import CORSMiddleware
 from model import IYFinanceGenericData, IYFinanceHistoryData
@@ -20,17 +21,9 @@ class CustomJSONResponse(JSONResponse):
 
 app = FastAPI(default_response_class=CustomJSONResponse)
 
-origins = [
-    "http://localhost",
-    "http://localhost:5173",
-    "http://127.0.0.1",
-    "http://127.0.0.1:5173",
-    "https://wonderful-bay-0ec57fa0f.5.azurestaticapps.net"
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -54,23 +47,25 @@ async def search_by_symbol(symbol: str):
     yf_ins_data = yf_ins.getSymbolsData([symbol])
     return yf_ins_data
 
-@app.get("/history/by-symbol/{symbol}/", response_model=List[IYFinanceHistoryData]) #
-async def history_by_symbol(symbol: str, period: str = '1mo'):
+
+@app.get("/history/by-symbol/{symbol}/", response_model=List[IYFinanceHistoryData])
+async def history_by_symbol(symbol: str, period: str = DEFAULT_HISTORY_PERIOD):
+    """
+    Retrieves the historical data for a given symbol.
+
+    Args:
+        symbol (str): The symbol for which the historical data is to be retrieved.
+        period (str, optional): The period for which the historical data is to be retrieved. Defaults to '1mo'.
+
+    Returns:
+        List[IYFinanceHistoryData]: A list of IYFinanceHistoryData objects, each representing the historical data for the given symbol for a specific date.
+
+    Raises:
+        Exception: If there is an error in fetching the data, an exception is raised and an empty list is returned.
+    """
     try:
         yf_ins = YahooFinanceQuery()
         yf_ins_data = yf_ins.getHistoryBySymbol(symbol, period)
         return yf_ins_data
     except:
         return []
-
-# @app.get("/market-indexes-list/", response_model=Dict[str, IYFinanceMarketIndexesInfo])
-# async def market_indexes_list():
-#     yf_ins = YahooFinanceQuery()
-#     yf_ins_data = yf_ins.getMarketIndexesData()
-#     return yf_ins_data
-
-# @app.get("/search/mutual-fund/by-symbol/{symbol}/", response_model=Dict[str, IYFinanceMutualFundInfo])
-# async def search_mutual_fund_by_symbol(symbol: str):
-#     yf_ins = YahooFinanceQuery()
-#     yf_ins_data = yf_ins.getMutualFundsInfoBySymbols([symbol])
-#     return yf_ins_data

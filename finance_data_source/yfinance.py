@@ -37,27 +37,3 @@ class YahooFinanceQuery:
             return historical_data_json
         except:
             raise ValueError('Error when get history data.')
-
-    # def getMarketIndexesData(self, symbols: list[str] = None):
-    #     if symbols is None:
-    #         symbols = self.market_indexes
-    #     mi_infos = {key: None for key in symbols}
-    #     try:
-    #         mis = yf.Tickers(symbols)
-    #         for key in mis.tickers:
-    #             mi_infos[key] = mis.tickers[key].info
-    #         return mi_infos
-    #     except:
-    #         return mi_infos
-    #
-    # def getMutualFundsInfoBySymbols(self, symbols: list[str] = None):
-    #     if symbols is None:
-    #         symbols = self.mutual_fund_initial_symbols
-    #     funds_infos = {key: None for key in symbols}
-    #     try:
-    #         funds = yf.Tickers(symbols)
-    #         for key in funds.tickers:
-    #             funds_infos[key] = funds.tickers[key].info
-    #         return funds_infos
-    #     except:
-    #         return funds_infos
