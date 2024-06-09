@@ -19,3 +19,13 @@ GET http://127.0.0.1:8000/history/by-symbol/MSFT/?period=1y
 Accept: application/json
 
 ###
+
+GET http://127.0.0.1:8000/analysis/by-openai/HSBC/
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/analysis/by-llama/VFIAX/
+Accept: application/json
+
+###

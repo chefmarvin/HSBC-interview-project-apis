@@ -3,9 +3,10 @@ from fastapi.responses import JSONResponse
 from constants import DEFAULT_HISTORY_PERIOD, ORIGINS
 from typing import Dict, Any, List
 from fastapi.middleware.cors import CORSMiddleware
+import logging
 from model import IYFinanceGenericData, IYFinanceHistoryData
 from finance_data_source.yfinance import YahooFinanceQuery
-import logging
+from service.analysis import get_llama_analysis
 
 class CustomJSONResponse(JSONResponse):
     def render(self, content: Any) -> bytes:
@@ -102,3 +103,12 @@ async def history_by_symbol(symbol: str, period: str = DEFAULT_HISTORY_PERIOD):
     except Exception as e:
         logger.error(f"Error when get history data for symbol {symbol}: {e}.")
         raise HTTPException(status_code=500, detail="Error when get history data.")
+
+@app.get("/analysis/by-llama/{symbol}/")
+async def openai_analysis(symbol: str):
+    try:
+        report = get_llama_analysis(symbol)
+        return { "report": report.choices[0].message.content }
+    except Exception as e:
+        logger.error(f"Error when get analysis data for symbol {symbol}: {e}.")
+        raise HTTPException(status_code=500, detail="Error when get analysis data.")

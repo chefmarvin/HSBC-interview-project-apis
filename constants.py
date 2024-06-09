@@ -2,6 +2,7 @@
 
 # Default period for historical data retrieval
 DEFAULT_HISTORY_PERIOD = '1mo'
+DEFAULT_ANALYSIS_HISTORY_PERIOD = '6mo'
 
 # Origins for CORS middleware
 ORIGINS = [
@@ -11,3 +12,6 @@ ORIGINS = [
     "http://127.0.0.1:5173",
     "https://wonderful-bay-0ec57fa0f.5.azurestaticapps.net"
 ]
+
+LLAMA_API_KEY = "LL-srQL3z8fhDj61ZxQ484E9zHWOPROMDIg0Y67nQCbqo3KjDn49TsmMksEVlCFPIlD"
+LLAMA_MODEL_ID = "codellama-34b-instruct"
