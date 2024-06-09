@@ -5,15 +5,17 @@ Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/default-mutual-funds-list/
+GET http://127.0.0.1:8000/default-symbols-list/
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/search/mutual-fund/by-symbol/DIAMX/
+GET http://127.0.0.1:8000/search/by-symbol/MSFT/
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/market-indexes-list/
+GET http://127.0.0.1:8000/history/by-symbol/MSFT/?period=1y
 Accept: application/json
+
+###
