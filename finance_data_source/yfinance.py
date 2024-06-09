@@ -26,7 +26,6 @@ class YahooFinanceQuery:
             return symbol_data
         except:
             raise ValueError('Error when get data by symbol(s).')
-            return symbol_data
 
     def getHistoryBySymbol(self, symbol: str, period: str = '1mo'):
         try:
@@ -38,7 +37,6 @@ class YahooFinanceQuery:
             return historical_data_json
         except:
             raise ValueError('Error when get history data.')
-            return None
 
     # def getMarketIndexesData(self, symbols: list[str] = None):
     #     if symbols is None:
