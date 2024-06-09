@@ -1,2 +1,13 @@
-# HSBC-project
-HSBC interview coding project
+# HSBC interview coding project
+
+[//]: # (todo)
+
+## Installation 
+
+Install depedencies with pip
+
+```bash
+pip install -r requirements.txt
+```
+
+
