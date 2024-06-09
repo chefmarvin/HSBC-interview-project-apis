@@ -41,6 +41,15 @@ async def root():
 
 @app.get("/default-symbols-list/", response_model=Dict[str, IYFinanceGenericData])
 async def default_symbols_list():
+    """
+    Retrieves the data for the default set of symbols.
+
+    Returns:
+        Dict[str, IYFinanceGenericData]: A dictionary where the key is the symbol and the value is an IYFinanceGenericData object representing the data for the given symbol.
+
+    Raises:
+        HTTPException: If there is an error in fetching the data, an HTTPException is raised with a 500 status code.
+    """
     try:
         yf_ins = YahooFinanceQuery()
         yf_ins_data = yf_ins.getSymbolsData()
@@ -51,6 +60,18 @@ async def default_symbols_list():
 
 @app.get("/search/by-symbol/{symbol}/", response_model=Dict[str, IYFinanceGenericData])
 async def search_by_symbol(symbol: str):
+    """
+    Retrieves the data for a given symbol from Yahoo Finance.
+
+    Args:
+        symbol (str): The symbol for which the data is to be retrieved.
+
+    Returns:
+        Dict[str, IYFinanceGenericData]: A dictionary where the key is the symbol and the value is an IYFinanceGenericData object representing the data for the given symbol.
+
+    Raises:
+        HTTPException: If there is an error in fetching the data, an HTTPException is raised with a 500 status code.
+    """
     try:
         yf_ins = YahooFinanceQuery()
         yf_ins_data = yf_ins.getSymbolsData([symbol])
@@ -61,6 +82,19 @@ async def search_by_symbol(symbol: str):
 
 @app.get("/history/by-symbol/{symbol}/", response_model=List[IYFinanceHistoryData])
 async def history_by_symbol(symbol: str, period: str = DEFAULT_HISTORY_PERIOD):
+    """
+    Retrieves the historical data for a given symbol from Yahoo Finance.
+
+    Args:
+        symbol (str): The symbol for which the historical data is to be retrieved.
+        period (str, optional): The period for which the historical data is to be retrieved. Defaults to DEFAULT_HISTORY_PERIOD.
+
+    Returns:
+        List[IYFinanceHistoryData]: A list of IYFinanceHistoryData objects, each representing the historical data for the given symbol for a specific date.
+
+    Raises:
+        HTTPException: If there is an error in fetching the data, an HTTPException is raised with a 500 status code.
+    """
     try:
         yf_ins = YahooFinanceQuery()
         yf_ins_data = yf_ins.getHistoryBySymbol(symbol, period)
