@@ -1,9 +1,12 @@
-from openai import OpenAI
 import json
+from openai import OpenAI
 from finance_data_source.yfinance import YahooFinanceQuery
 from constants import LLAMA_API_KEY, LLAMA_MODEL_ID
 
-client = OpenAI(api_key = LLAMA_API_KEY, base_url = "https://api.llama-api.com")
+client = OpenAI(
+    api_key = LLAMA_API_KEY,
+    base_url = "https://api.llama-api.com"
+)
 
 def get_llama_analysis(symbol: str):
     yf_ins = YahooFinanceQuery()

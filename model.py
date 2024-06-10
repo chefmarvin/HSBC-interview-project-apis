@@ -215,3 +215,9 @@ class IYFinanceHistoryData(BaseModel):
 
     class Config:
         exclude_unset = True
+
+class IGenAIReport(BaseModel):
+    report: str
+
+    class Config:
+        exclude_unset = True

@@ -25,7 +25,7 @@ Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/analysis/by-llama/VFIAX/
+GET http://127.0.0.1:8000/analysis/by-genAI/VFIAX/
 Accept: application/json
 
 ###

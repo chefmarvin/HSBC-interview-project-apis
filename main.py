@@ -4,7 +4,7 @@ from constants import DEFAULT_HISTORY_PERIOD, ORIGINS
 from typing import Dict, Any, List
 from fastapi.middleware.cors import CORSMiddleware
 import logging
-from model import IYFinanceGenericData, IYFinanceHistoryData
+from model import IYFinanceGenericData, IYFinanceHistoryData, IGenAIReport
 from finance_data_source.yfinance import YahooFinanceQuery
 from service.analysis import get_llama_analysis
 
@@ -104,7 +104,7 @@ async def history_by_symbol(symbol: str, period: str = DEFAULT_HISTORY_PERIOD):
         logger.error(f"Error when get history data for symbol {symbol}: {e}.")
         raise HTTPException(status_code=500, detail="Error when get history data.")
 
-@app.get("/analysis/by-llama/{symbol}/")
+@app.get("/analysis/by-genAI/{symbol}/", response_model=IGenAIReport)
 async def openai_analysis(symbol: str):
     try:
         report = get_llama_analysis(symbol)
