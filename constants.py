@@ -15,3 +15,5 @@ ORIGINS = [
 
 LLAMA_API_KEY = "LL-srQL3z8fhDj61ZxQ484E9zHWOPROMDIg0Y67nQCbqo3KjDn49TsmMksEVlCFPIlD"
 LLAMA_MODEL_ID = "codellama-34b-instruct"
+
+GEMINI_API_KEY = "AIzaSyDuCbesPBesFQe_jhl0ituJu1fL7a6dEFk"

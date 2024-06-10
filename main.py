@@ -106,6 +106,18 @@ async def history_by_symbol(symbol: str, period: str = DEFAULT_HISTORY_PERIOD):
 
 @app.get("/analysis/by-genAI/{symbol}/", response_model=IGenAIReport)
 async def genAI_analysis(symbol: str):
+    """
+    Retrieves the AI-generated analysis for a given symbol.
+
+    Args:
+        symbol (str): The symbol for which the AI analysis is to be retrieved.
+
+    Returns:
+        IGenAIReport: An IGenAIReport object containing the AI-generated analysis for the given symbol.
+
+    Raises:
+        HTTPException: If there is an error in fetching the data, an HTTPException is raised with a 500 status code.
+    """
     try:
         report = get_llama_analysis(symbol)
         return { "report": report.choices[0].message.content }
