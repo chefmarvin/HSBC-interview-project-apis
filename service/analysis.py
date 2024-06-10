@@ -14,7 +14,7 @@ def get_llama_analysis(symbol: str):
     type = yf_ins_data[symbol]['info']['quoteType'] if 'quoteType' in yf_ins_data[symbol]['info'] else None
     type_str = "stock" if type == 'EQUITY' else "mutual fund"
     data_str = json.dumps(yf_ins_data[symbol]['info'], indent=2)
-    prompt_str = f"I have some information about the {type_str} which symbol is {symbol}. and also its basic data {data_str}, give me a brief analysis including investment suggestions."
+    prompt_str = f"I have some information about the {type_str} which symbol is {symbol}. and also its basic data {data_str}, give me a brief analysis including investment suggestions begin with Brief analyze report for {symbol}."
     response = client.chat.completions.create(
         model=LLAMA_MODEL_ID,
         stream=False,
