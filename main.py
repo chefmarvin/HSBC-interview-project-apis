@@ -105,7 +105,7 @@ async def history_by_symbol(symbol: str, period: str = DEFAULT_HISTORY_PERIOD):
         raise HTTPException(status_code=500, detail="Error when get history data.")
 
 @app.get("/analysis/by-genAI/{symbol}/", response_model=IGenAIReport)
-async def genai_analysis(symbol: str):
+async def genAI_analysis(symbol: str):
     try:
         report = get_llama_analysis(symbol)
         return { "report": report.choices[0].message.content }
