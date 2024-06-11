@@ -10,6 +10,17 @@ Install depedencies with pip
 pip install -r requirements.txt
 ```
 
+## Run
+
+Run the startup script
+
+```bash
+source startup.sh
+```
+
+## Test
+
+All the API tests can be found in test_main.http
 
 ## Web API
 
